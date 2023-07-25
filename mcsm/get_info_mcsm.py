@@ -2,16 +2,16 @@ import requests
 from bs4 import BeautifulSoup as bs
 
 # TODO
-protein = "5uv8"
+protein = "5uwc"
 num = 10
 # process = "process"
 process = "min_process"
 
 # 初期表示用
 print("++++++++++++++++++++++")
-print(f"protein : {protein}")
-print(f"trajectory : {num}")
-print(f"process : {process}")
+print(f" protein : {protein}")
+print(f" trajectory : {num}")
+print(f" process : {process}")
 print("++++++++++++++++++++++")
 print("")
 
@@ -25,8 +25,8 @@ for i in range(num):
 
     print(protein + ": " + trj_num)
 
-    url_path = f"/home/komadori/documents/ppi_scr_v2/result/url/{protein}/{process}/mcsm_url_{protein}_{trj_num}.txt"
-    result_path = f"/home/komadori/documents/ppi_scr_v2/result/delta_g/{protein}/mcsm_{process}_{protein}_{trj_num}.txt"
+    url_path = f"/home/komadori/documents/ppi_scr_v2/result/mcsm/url/{protein}/{process}/mcsm_url_{protein}_{trj_num}.txt"
+    result_path = f"/home/komadori/documents/ppi_scr_v2/result/mcsm/delta_g/{protein}/mcsm_{process}_{protein}_{trj_num}.txt"
 
     fw = open(result_path, "w")
     fw.write("")

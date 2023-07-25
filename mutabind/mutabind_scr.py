@@ -1,21 +1,30 @@
-# selenium 4.10用
-# selenium 4.10から、web_drive_managerが上手く機能しない
+# selenium 4.1用
+# MUTABIND2のスクレイピング用
 
 from time import sleep
 from selenium import webdriver
-from selenium.webdriver.common.by import By  # locate elements
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
 # TODO
-# protein = "5uv8"
-# mutation = "K397W"
-protein = "5uwc"
-mutation = "W397K"
+# PROCESS
+process = "process"
+# process = "min_process"
+# WILD TYPE
+protein = "5uv8"
+mutation = "K397W"
+# MUTANT
+# protein = "5uwc"
+# mutation = "W397K"
+# common
 mutation_chain = "B"
 email_address = "20a1004c@shinshu-u.ac.jp"
-# process = "process"
-process = "min_process"
 
+service = Service(executable_path="./../chromedriver")
+options = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=options)
+
+# code
 for i in range(10):
     trj = i + 1
 
@@ -25,20 +34,16 @@ for i in range(10):
         trj_num = f"trj{trj}"
 
     # url保存ファイルの作成
-    url_path = f"/home/komadori/documents/ppi_scr_v2/result/mcsm/url/{protein}/{process}/mcsm_url_{protein}_{trj_num}.txt"
+    url_path = f"/home/komadori/documents/ppi_scr_v2/result/mutabind/url/{protein}/{process}/mcsm_url_{protein}_{trj_num}.txt"
     fw = open(url_path, 'w')
     fw.write('')
     fw.close()
 
-    service = Service(executable_path="./../chromedriver")
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=service, options=options)
-
     for j in range(10):
         run_num = j + 13
 
-        # data_path = f"/home/komadori/documents/ppi_scr_v2/data/{process}/{protein}/{trj_num}_run{run_num}_edit_atom.pdb"
-        data_path = f"/home/komadori/documents/ppi_scr_v2/data/{process}/{protein}/{protein}_{trj_num}_run{run_num}_min_edit.pdb"
+        data_path = f"/home/komadori/documents/ppi_scr_v2/data/{process}/{protein}/{trj_num}_run{run_num}_edit_atom.pdb"
+        # data_path = f"/home/komadori/documents/ppi_scr_v2/data/{process}/{protein}/{protein}_{trj_num}_run{run_num}_min_edit.pdb"
 
         driver.get('https://biosig.lab.uq.edu.au/mcsm_ppi2/submit_prediction')
 
@@ -76,6 +81,6 @@ for i in range(10):
         fa.write(cur_url)
         fa.close()
 
-        sleep(10)
+        sleep(30)
 
 driver.quit()
